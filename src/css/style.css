@@ -1,0 +1,39 @@
+h1 {
+  text-align: center;
+}
+
+main {
+  margin: auto;
+}
+
+.game-field {
+  display: flex;
+  flex-wrap: wrap;
+  margin: auto;
+  width: 200px;
+  height: 200px;
+  background-color: burlywood;
+  border: black 2px double;
+  border-radius: 10px;
+}
+
+.hole {
+  margin: 20px;
+  border-radius: 50%;
+  box-sizing: border-box;
+  width: 60px;
+  height: 60px;
+  border: black solid 1px;
+}
+
+.goblin {
+  background-image: url("../image/goblin.png");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  background-color: darkgrey;
+}
+
+.empty {
+  background-color: gray;
+}
