@@ -1,3 +1,5 @@
+import GameField from "./GameField";
+
 document.addEventListener('DOMContentLoaded', () => {
   const gameField = new GameField(document.querySelector('.game-field'));
 

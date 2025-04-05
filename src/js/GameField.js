@@ -1,4 +1,4 @@
-class GameField {
+export default class GameField {
   constructor(gameField) {
     this.gameField = gameField;
   }
