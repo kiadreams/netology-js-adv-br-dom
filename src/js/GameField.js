@@ -1,22 +1,28 @@
 export default class GameField {
+  #lastGoblinFieldIndex = 0;
+
   constructor(gameField) {
     this.gameField = gameField;
+    this.holes = this.gameField.querySelectorAll(".hole");
   }
 
   deleteGoblin() {
-    const holeWithGoblin = this.gameField.querySelector('.goblin');
+    const holeWithGoblin = this.gameField.querySelector(".goblin");
     if (holeWithGoblin != null) {
-      holeWithGoblin.classList.replace('goblin', 'empty');
+      holeWithGoblin.classList.remove("goblin");
     }
   }
 
-  showNextGoblin() {
-    const emptyHoles = this.gameField.querySelectorAll('.empty');
-    this.deleteGoblin();
-    emptyHoles[this.getRandomEmptyHoleIndex(emptyHoles.length)].classList.replace('empty', 'goblin');
+  showGoblin() {
+    let fieldIndex = this.#getRandomHoleIndex();
+    while (fieldIndex === this.#lastGoblinFieldIndex) {
+      fieldIndex = this.#getRandomHoleIndex();
+    }
+    this.holes[fieldIndex].classList.add("goblin");
+    this.#lastGoblinFieldIndex = fieldIndex;
   }
 
-  getRandomEmptyHoleIndex(max) {
-    return Math.floor(Math.random() * max);
+  #getRandomHoleIndex() {
+    return Math.floor(Math.random() * 4);
   }
 }
