@@ -10,8 +10,10 @@ branches:
 cache: node_modules  # кеширование
 
 install:
-  - yarn  # команда установки зависимостей
+ # команда установки зависимостей
+  - corepack enable
   - yarn set version stable
+  - yarn
 
 build: off  # отключаем встроенную в appveyor систему сборки
 
