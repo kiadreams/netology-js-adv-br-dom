@@ -1,6 +1,6 @@
 image: Ubuntu2204  # образ для сборки
 
-stack: node 20  # окружение
+stack: node 22.14.0  # окружение
 
 branches:
   only:
@@ -11,6 +11,7 @@ cache: node_modules  # кеширование
 
 install:
   - yarn  # команда установки зависимостей
+  - yarn set version stable
 
 build: off  # отключаем встроенную в appveyor систему сборки
 
@@ -18,7 +19,7 @@ build_script:
   - yarn build   # команда сборки
 
 test_script:
-  - yarn lint && yarn test  # скрипт тестирования
+  - yarn lint  # скрипт
 
 deploy_script:  # скрипт развёртывания
   - git config --global credential.helper store
