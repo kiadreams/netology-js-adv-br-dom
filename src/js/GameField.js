@@ -1,45 +1,31 @@
 export default class GameField {
-  #gameField;
-  #lastGoblinFieldIndex = 0;
-  #holes;
-  #goblin;
+  #lastGoblinHoledIndex = 0;
+  #holes = [];
+  #countOfHoles = 4;
 
-  constructor(gameField) {
-    this.#gameField = gameField;
-    this.#holes = this.#gameField.querySelectorAll(".hole");
-    this.#goblin = this.#createGoblin();
-
-    // Вариант получения персонажа из html-разметки
-    // this.#goblin = document.querySelector('.goblin');
+  constructor() {
+    this.gameField = this.#createGameFields();
+    document.querySelector("main").append(this.gameField);
   }
 
-  deleteGoblin() {
-    this.#goblin.classList.add("hidden");
-
-    // Тоже работает...
-    // const goblinHole = this.#gameField.querySelector('.goblin');
-    // console.log(goblinHole.parentElement.removeChild(goblinHole));
-  }
-
-  showGoblin() {
-    let fieldIndex = this.#getRandomHoleIndex();
-    while (fieldIndex === this.#lastGoblinFieldIndex) {
-      fieldIndex = this.#getRandomHoleIndex();
+  get emptyHole() {
+    let fieldIndex = 0;
+    while (fieldIndex === this.#lastGoblinHoledIndex) {
+      fieldIndex = Math.floor(Math.random() * this.#countOfHoles);
     }
-    this.#holes[fieldIndex].append(this.#goblin);
-    this.#goblin.classList.remove("hidden");
-    this.#lastGoblinFieldIndex = fieldIndex;
+    this.#lastGoblinHoledIndex = fieldIndex;
+    return this.#holes[fieldIndex];
   }
 
-  #getRandomHoleIndex() {
-    return Math.floor(Math.random() * 4);
-  }
-
-  #createGoblin() {
-    const goblinImg = document.createElement("img");
-    goblinImg.src = "image/goblin.png";
-    goblinImg.alt = "Изоображение гоблина";
-    goblinImg.classList.add("goblin");
-    return goblinImg;
+  #createGameFields() {
+    const gameField = document.createElement("div");
+    gameField.classList.add("game-field");
+    for (let i = 0; i < this.#countOfHoles; i++) {
+      const hole = document.createElement("div");
+      hole.classList.add("hole");
+      gameField.append(hole);
+      this.#holes.push(hole);
+    }
+    return gameField;
   }
 }
